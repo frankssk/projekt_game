@@ -19,9 +19,10 @@
 from random import randint
 import creatures
 
+
 def eventMap(floorPl):
-    #eventToMap = int(randint(0, 100))
-    eventToMap = 15
+    eventToMap = int(randint(0, 100))
+
     if floorPl % 10 == 0:
         command = room()
         return command
@@ -35,18 +36,19 @@ def eventMap(floorPl):
         elif 30 <= eventToMap < 50:
             command = chest()
             return command
- #       elif 90 <= eventToMap < 95:
-  #          command = down()
-    #        return command
- #       elif 95 <= eventToMap <= 100:
-   #         command = up()
-     #       return command
+        #       elif 90 <= eventToMap < 95:
+        #          command = down()
+        #        return command
+        #       elif 95 <= eventToMap <= 100:
+        #         command = up()
+        #       return command
         elif 50 <= eventToMap < 60:
             command = camp()
             return command
         else:
             command = empty()
             return command
+
 
 # не готовые
 
@@ -60,6 +62,8 @@ def Loot():
         print('вы нашли большое')
     else:
         print('вы нашли свиток')
+
+
 def down():
     print("Вы упали в яму, и пролетели несколько этажей.\n Кости вроде целы.")
     print('выбери действие: \n Бросить кубик = 1\n Выпить зелье = 2')
@@ -72,6 +76,8 @@ def down():
         else:
             command = str(input('не верная команда\n'))
     return command
+
+
 def up():
     print('Вы наткнулись на тайный проход, удалось сократить путь!')
     print('выбери действие: \n Бросить кубик = 1\n Выпить зелье = 2')
@@ -85,6 +91,7 @@ def up():
             command = str(input('не верная команда\n'))
     return command
 
+
 # готовые
 
 def room():
@@ -97,6 +104,8 @@ def room():
         else:
             command = str(input('не верная команда\n'))
     return command
+
+
 def camp():
     print('Вы нашли место чей-то стоянки. Оно была брошено давным-давно.\n Может удастя найти что ценное?')
     print('выбери действие: \n Бросить кубик = 1\n Выбрать зелье = 2\n Осмотреть стоянку = 3')
@@ -111,6 +120,8 @@ def camp():
         else:
             command = str(input('не верная команда\n'))
     return command
+
+
 def chest():
     print('Вы нашли СУНДУК! Что же там может быть?!')
     print('выбери действие: \n Бросить кубик = 1\n Выпить зелье = 2\n Осмотреть сундук = 3')
@@ -125,6 +136,8 @@ def chest():
         else:
             command = str(input('не верная команда\n'))
     return command
+
+
 def potHPLoot():
     i = int(randint(0, 100))
     if 0 <= i < 40:
@@ -139,6 +152,8 @@ def potHPLoot():
     else:
         print('вы нашли свиток воскрешения. Он воскресит вас в случае гибели!')
         creatures.playerItem['scroll'] = creatures.playerItem['scroll'] + 1
+
+
 def potHP():
     i = int(randint(0, 100))
     if 0 <= i < 40:
@@ -165,6 +180,8 @@ def potHP():
         else:
             command = str(input('не верная команда\n'))
     return command
+
+
 def empty():
     print('Пустая комната... ')
     print('выбери действие: \n Бросить кубик = 1\n Выбрать зелье = 2')
@@ -177,9 +194,10 @@ def empty():
         else:
             command = str(input('не верная команда\n'))
     return command
+
+
 def monster():
     i = int(randint(0, 100))
-    command = []
     if 0 <= i <= 25:
         print('Вы наткнулись на скелета')
         print(creatures.skeleton)
@@ -204,10 +222,12 @@ def monster():
     c = str(input())
     while True:
         if c == '4':
+            command = []
             command.append(c)
             command.append(mob)
             return command
         if c == '5':
-            break
+            command = '5'
+            return command
         else:
             c = str(input('не верная команда\n'))
