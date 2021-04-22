@@ -1,3 +1,5 @@
+import random
+
 import action as ac
 import event as ev
 import creatures as cr
@@ -126,34 +128,52 @@ def commandPLayer(mobCom):
     if mobCom[0] == '1':
         attack(mobCom[1])
         if mobCom[1]['hp'] > 0:
-            attackMob(mobCom[1])
+            i = random.randint(1, 2)
+            if i == 1:
+                attackMob(mobCom[1])
+            else:
+                blokedMob(mobCom[1])
     elif mobCom[0] == '2':
         bloked(mobCom[1])
         if mobCom[1]['hp'] > 0:
-            blokedMob(mobCom[1])
+            i = random.randint(1, 2)
+            if i == 1:
+                attackMob(mobCom[1])
+            else:
+                blokedMob(mobCom[1])
     elif mobCom[0] == '3':
         ac.howPot()
     elif mobCom[0] == '4':
         commandPL(mobCom)
 
 
-def attackMob(mob):
-    cr.playerCopy['hp'] = cr.playerCopy['hp'] - mob['dmg']
-    return cr.playerCopy['hp']
 
 
 def attack(mob):
     mob['hp'] = mob['hp'] - cr.playerCopy['dmg']
+    print(f"ВЫ наносите {cr.playerCopy['dmg']} урона")
     return mob['hp']
 
 
 def bloked(mob):
     mob['hp'] = mob['hp'] - dmgblok(cr.playerCopy['dmg'], mob['blok'])
+    if dmgblok(cr.playerCopy['dmg'], mob['blok']) > 0:
+        print(f"ВЫ наносите {dmgblok(cr.playerCopy['dmg'], mob['blok'])} урона через блок")
+    else:
+        print("Монстр заблокировал вашу атаку")
     return mob['hp']
 
+def attackMob(mob):
+    cr.playerCopy['hp'] = cr.playerCopy['hp'] - mob['dmg']
+    print(f"ВАМ наносят {mob['dmg']} урона")
+    return cr.playerCopy['hp']
 
 def blokedMob(mob):
     cr.playerCopy['hp'] = cr.playerCopy['hp'] - dmgblok(mob['dmg'], cr.playerCopy['blok'])
+    if dmgblok(mob['dmg'], cr.playerCopy['blok']) > 0:
+        print(f"ВАМ наносят {dmgblok(mob['dmg'], cr.playerCopy['blok'])} урона через блок")
+    else:
+        print("Вы заблокировали атаку монстра")
     return cr.playerCopy['hp']
 
 
@@ -168,8 +188,8 @@ def dmgblok(dmg, blok):
 while True:
     if floor == 0:
         print('Здраствуй путник. Как тебя зовут?')
-        name = str(input('введи свое имя\n'))
-        print(f'Привет {name}. Вот и начался твой поход из этого подземелья')
+        cr.playerCopy['name'] = str(input('введи свое имя\n'))
+        print(f"Привет {cr.playerCopy['name']}. Вот и начался твой поход из этого подземелья")
         floor += 1
     elif floor == 1:
         print('Этаж 1')

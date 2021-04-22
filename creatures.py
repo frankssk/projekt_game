@@ -5,7 +5,7 @@
 #+ создать орка
 #+ создать троля
 
-player = {'hp': 100, 'dmg': 5, "arm": 1, 'blok': 10}
+player = {'name': '', 'hp': 100, 'dmg': 5, "arm": 1, 'blok': 10}
 
 playerItem = {'potMin': 1, 'potStand': 1, 'potMax': 1, 'scroll': 0}
 
